@@ -4,7 +4,7 @@ data_ingestion:
 feature_engineering:
   max_features: 500
 
-model_building:
+model_training:
   max_iter: 2000
   multi_clas: 'ovr'
   solver: 'lbfgs'
