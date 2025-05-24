@@ -77,7 +77,7 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> Logis
         if X_train.shape[0] != y_train.shape[0]:
             raise ValueError("The number of samples in X_train and y_train must be the same.")
         
-        logger.debug('Initializing RandomForest model with parameters: %s', params)
+        logger.debug('Initializing logistic regression model with parameters: %s', params)
         clf = LogisticRegression(**params)
         
         logger.debug('Model training started with %d samples', X_train.shape[0])
