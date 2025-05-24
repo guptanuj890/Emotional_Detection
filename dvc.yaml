@@ -29,8 +29,9 @@ stages:
     - data/processed
     - src/model_training.py
     params:
-    - model_training.n_estimators
-    - model_training.random_state
+    - model_training.max_iter
+    - model_training.multi_class
+    - model_training.solver
     outs:
     - models/model.pkl
   model_evaluation:
