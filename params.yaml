@@ -6,5 +6,5 @@ feature_engineering:
 
 model_training:
   max_iter: 2000
-  multi_clas: 'ovr'
+  multi_class: 'ovr'
   solver: 'lbfgs'

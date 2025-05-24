@@ -115,10 +115,10 @@ def save_model(model, file_path: str) -> None:
 
 def main():
     try:
-        params = load_params(params_path = 'params.yaml')
-        max_iter = params['model_training']['max_iter']
-        multi_class = params['model_training']['multi_class']
-        solver = params['model_training']['solver']
+        params = load_params('params.yaml')['model_training']
+        #max_iter = params['model_training']['max_iter']
+        #multi_class = params['model_training']['multi_class']
+        #solver = params['model_training']['solver']
         
         
         #params = {'max_iter':2000, 'multi_class':'ovr', 'solver':'lbfgs'}
