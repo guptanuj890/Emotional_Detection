@@ -4,6 +4,7 @@ import os
 import pickle
 import logging
 from sklearn.linear_model import LogisticRegression
+import yaml
 
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok = True)
@@ -44,6 +45,23 @@ def load_data(file_path: str) -> pd.DataFrame:
         raise
     except Exception as e:
         logger.error('Unexpected error occurred while loading the data: %s', e)
+        raise
+  
+def load_params(params_path: str) -> dict:
+    """Load parameters from YAML file."""
+    try:
+        with open(params_path, 'r') as file:
+            params = yaml.safe_load(file)
+        logger.debug('Parameters retrieved from %s', params_path)
+        return params
+    except FileNotFoundError:
+        logger.error('File not found: %s', params_path)
+        raise
+    except yaml.YAMLError as e:
+        logger.error('YAML error: %s', e)
+        raise
+    except Exception as e:
+        logger.error('Unexpected error: %s', e)
         raise
     
 def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> LogisticRegression:
@@ -97,7 +115,13 @@ def save_model(model, file_path: str) -> None:
 
 def main():
     try:
-        params = {'max_iter':2000, 'multi_class':'ovr', 'solver':'lbfgs'}
+        params = load_params(params_path = 'params.yaml')
+        max_iter = params['model_training']['max_iter']
+        multi_class = params['model_training']['multi_class']
+        solver = params['model_training']['solver']
+        
+        
+        #params = {'max_iter':2000, 'multi_class':'ovr', 'solver':'lbfgs'}
         train_data = load_data('./data/processed/train_tfidf.csv')
         X_train = train_data.iloc[:, :-1].values
         y_train = train_data.iloc[:, -1].values
